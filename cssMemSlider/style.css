@@ -1,20 +1,19 @@
 body {
-    width: 100vw;
-    height: 100vh;
-    font-size: 16rem;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    background: cyan;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
+    font-size: 16rem;
+    background: cyan;
 }
 
 
 .radio-btn {
-    display: none;
+    height: 0;
+    visibility: hidden;
+    user-select: unset;
 }
 
 .fx {
@@ -23,30 +22,49 @@ body {
     background-color: red;
 }
 .fx, .container {
-    justify-self: center;
     align-self: center;
-    grid-column: 1 / -1;
     grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    justify-self: center;
     transform: translateZ(0);
 }
 
+@keyframes slideFuzz {
+    from {
+        transform: rotate(-1deg);
+    }
+    to {
+        transform: rotate(1deg);
+    }
+}
+
+/* ^----------------------------- main container ----------------------------- */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: top;
+    width:  512rem;
+    height: auto;
+}
+
 /* >--------------------------------------------------------------< */
-/* >                            SLIDER                            < */
+/* >                               FX                             < */
 /* >--------------------------------------------------------------< */
 .fx {
     display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
-    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
 
 .fx-circle-1, .fx-circle-2 {
-    justify-self: center;
     align-self: center;
-    grid-column: 1 / -1;
     grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    justify-self: center;
     border-radius: 10000rem;
 }
 
@@ -84,6 +102,34 @@ body {
     }
 }
 
+/* >--------------------------------------------------------------< */
+/* >                            SLIDER                            < */
+/* >--------------------------------------------------------------< */
+
+/* ^----------------------------- slider-block ----------------------------- */
+.slider {
+    width: 100%;
+    height: auto;
+    padding-bottom: 24rem;
+    overflow: hidden;
+    border-radius: 10000rem;
+    animation: slideFuzz 0.01s linear infinite alternate;
+}
+
+/* ^----------------------------- slider images container ----------------------------- */
+
+.slide-container {
+    display: flex;
+    width: 400%;
+    transition: transform 5s ease-out;
+}
+
+.slide {
+    width: 512rem;
+    height: 512rem;
+}
+
+/* ^----------------------------- images ----------------------------- */
 .img-1 {
     width: 512rem;
     height: 512rem;
@@ -109,136 +155,120 @@ body {
     border-radius: 10000rem;
 }
 
-/* >--------------------------------------------------------------< */
-/* >                            SLIDER                            < */
-/* >--------------------------------------------------------------< */
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width:  512rem;
-    height: 512rem;
+#radio-btn-1:checked ~ .slider > .slide-container {
+    transform: translateX(0%);
 }
 
-
-
-.slider {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    border-radius: 10000rem;
-    animation: slideFuzz 0.01s linear infinite alternate;
+#radio-btn-2:checked ~ .slider > .slide-container {
+    transform: translateX(-25%);
 }
 
-.slider-container {
-    display: flex;
-    width: 400%;
-    height: 100%;
-
+#radio-btn-3:checked ~ .slider > .slide-container {
+    transform: translateX(-50%);
 }
 
-.slide-container {
-
+#radio-btn-4:checked ~ .slider > .slide-container {
+    transform: translateX(-75%);
 }
-
-@keyframes slideFuzz {
-    from {
-        transform: rotate(-1deg);
-    }
-    to {
-        transform: rotate(1deg);
-    }
-}
-
-.slide {
-    width: 512rem;
-    height: 512rem;
-}
-
-
 /* >--------------------------------------------------------------< */
 /* >                             TEXTS                            < */
 /* >--------------------------------------------------------------< */
 
 .texts {
     display: flex;
-    flex-basis: 50%;
-    color: cyan;
+    flex-basis: 70%;
+    height: 64rem;
+    overflow: hidden;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size: 16rem;
-    font-weight: bold;
     line-height: 1;
+    font-weight: bold;
+    color: cyan;
     letter-spacing: 8px;
-    overflow: hidden;
-    height: 64rem;
     animation: slideFuzz 0.5s linear infinite alternate;
 }
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100%*4);
+    transition: transform 1s ease-out;
+}
+
 .p1 {
+    display: flex;
     height: 64rem;
 }
 
 
+#radio-btn-1:checked ~ .texts > .text-container {
+    transform: translateX(0);
+}
+
+#radio-btn-2:checked ~ .texts > .text-container {
+    transform: translateY(-64rem);
+}
+
+#radio-btn-3:checked ~ .texts > .text-container {
+    transform: translateY(-128rem);
+}
+
+#radio-btn-4:checked ~ .texts > .text-container {
+    transform: translateY(-196rem);
+}
 
 /* >--------------------------------------------------------------< */
 /* >                           CONTROLS                           < */
 /* >--------------------------------------------------------------< */
 
 .controls   {
-    flex-basis: 50%;
     display: flex;
+    flex-basis: 30%;
     justify-content: right;
-    align-items: center;
-    width: 50%;
-    gap: 2%;
 }
+
 .control {
-    background: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36rem;
+    height: 36rem;
     border-radius: 10000rem;
-    width: 48rem;
-    height: 48rem;
+    cursor: pointer;
 }
 
-
-.slide-container {
+.control_place {
     display: flex;
-    transition: all 10s ease-out;
-}
-.text-container {
-    display: flex;
-    flex-direction: column;
-    transition: all 1s ease-out;
-}
-
-#radio-btn-1:checked ~ .slider > .slider-container > .slide-container {
-    margin-left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 18rem;
+    background: green;
+    border-radius: 10000rem;
 }
 
-#radio-btn-2:checked ~ .slider > .slider-container > .slide-container {
-    margin-left: calc(-100%/4*1);
+.control:hover .control_place {
+    background: orange;
+}
+.control:active .control_place {
+    background: yellowgreen;
 }
 
-#radio-btn-3:checked ~ .slider > .slider-container > .slide-container {
-    margin-left: calc(-100%/4*2);
+#radio-btn-1:checked ~ * [for="radio-btn-1"] > .control_place,
+#radio-btn-2:checked ~ * [for="radio-btn-2"] > .control_place,
+#radio-btn-3:checked ~ * [for="radio-btn-3"] > .control_place,
+#radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place{
+    background: magenta;
 }
 
-#radio-btn-4:checked ~ .slider > .slider-container > .slide-container {
-    margin-left: calc(-100%/4*3);
-}
+/* >--------------------------------------------------------------< */
+/* >                             MEDIA                            < */
+/* >--------------------------------------------------------------< */
 
-#radio-btn-1:checked ~ .texts > .text-container {
-    margin-top: 0;
-}
+@media (max-width: 360px) {
+    html {
+        font-size: calc(1rem*2);
+    }
 
-#radio-btn-2:checked ~ .texts > .text-container {
-    margin-top: calc(-100%/4*1);
-}
-
-#radio-btn-3:checked ~ .texts > .text-container {
-    margin-top: calc(-100%/4*2);
-}
-
-#radio-btn-4:checked ~ .texts > .text-container {
-    margin-top: calc(-100%/4*3);
 }
