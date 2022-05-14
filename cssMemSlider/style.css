@@ -268,7 +268,25 @@ body {
 
 @media (max-width: 360px) {
     html {
-        font-size: calc(1rem*2);
+        font-size: calc(1rem/32);
+    }
+    .container {
+        gap: 64rem;
+    }
+    .slider, .texts, .controls {
+        justify-content: center;
+        flex-basis: 100%;
+    }
+    .slider {
+        order: 1;
+        padding: 0;
+    }
+    .controls {
+        order: 2;
+    }
+    .texts {
+        order: 3;
+        /* font-size: 16rem; */
     }
 
 }
