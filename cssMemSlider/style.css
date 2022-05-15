@@ -154,6 +154,7 @@ body {
     height: 512rem;
     border: 20px solid magenta;
     border-radius: 10000rem;
+    object-fit: cover;
 }
 
 
@@ -262,12 +263,26 @@ body {
 #radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place{
     background: magenta;
 }
+#radio-btn-1:checked ~ * [for="radio-btn-1"] > .control_place:hover,
+#radio-btn-2:checked ~ * [for="radio-btn-2"] > .control_place:hover,
+#radio-btn-3:checked ~ * [for="radio-btn-3"] > .control_place:hover,
+#radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place:hover{
+    background: orange;
 
+}
+
+#radio-btn-1:checked ~ * [for="radio-btn-1"] > .control_place:active,
+#radio-btn-2:checked ~ * [for="radio-btn-2"] > .control_place:active,
+#radio-btn-3:checked ~ * [for="radio-btn-3"] > .control_place:active,
+#radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place:active{
+    background: yellowgreen;
+
+}
 /* >--------------------------------------------------------------< */
 /* >                             MEDIA                            < */
 /* >--------------------------------------------------------------< */
 
-@media (max-width: 360px) {
+@media (max-width: 525px) {
     html {
         font-size: calc(1rem/32);
     }
@@ -287,7 +302,6 @@ body {
     }
     .texts {
         order: 3;
-        /* font-size: 16rem; */
     }
 
 }
