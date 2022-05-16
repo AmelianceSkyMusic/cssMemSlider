@@ -1,0 +1,307 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-size: 16rem;
+    background: cyan;
+}
+
+
+.radio-btn {
+    height: 0;
+    visibility: hidden;
+    user-select: unset;
+    display: none;
+}
+
+.fx {
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+}
+.fx, .container {
+    align-self: center;
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    justify-self: center;
+    transform: translateZ(0);
+}
+
+@keyframes slideFuzz {
+    from {
+        transform: rotate(-1deg);
+    }
+    to {
+        transform: rotate(1deg);
+    }
+}
+
+/* ^----------------------------- main container ----------------------------- */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: top;
+    width:  512rem;
+    height: auto;
+}
+
+/* >--------------------------------------------------------------< */
+/* >                               FX                             < */
+/* >--------------------------------------------------------------< */
+.fx {
+    display: flex;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.fx-circle-1, .fx-circle-2 {
+    align-self: center;
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    justify-self: center;
+    border-radius: 10000rem;
+}
+
+.fx-circle-1 {
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+    background-color: blue;
+    animation: circle-animation 2s linear infinite reverse;
+}
+
+.fx-circle-2 {
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+    background-color: blueviolet;
+    animation: circle-animation 2s linear infinite;
+}
+
+@keyframes circle-animation {
+    0% {
+        transform: perspective(100rem) translateX(0%) translateZ(0);
+        filter: brightness(1);
+    }
+    25% {
+        transform: perspective(100rem) translateX(-50%) translateZ(-50rem);
+    }
+    50% {
+        transform: perspective(100rem) translateX(0%) translateZ(-100rem);
+        filter: brightness(0.8);
+    }
+    75% {
+        transform: perspective(100rem) translateX(50%) translateZ(-50rem);
+    }
+    100% {
+        transform: perspective(100rem) translateX(0%) translateZ(0);
+    }
+}
+
+/* >--------------------------------------------------------------< */
+/* >                            SLIDER                            < */
+/* >--------------------------------------------------------------< */
+
+/* ^----------------------------- slider-block ----------------------------- */
+.slider {
+    width: 100%;
+    height: auto;
+    padding-bottom: 24rem;
+    overflow: hidden;
+    border-radius: 10000rem;
+    animation: slideFuzz 0.01s linear infinite alternate;
+}
+
+/* ^----------------------------- slider images container ----------------------------- */
+
+.slide-container {
+    display: flex;
+    width: 400%;
+    transition: transform 5s ease-out;
+}
+
+.slide {
+    width: 512rem;
+    height: 512rem;
+}
+
+/* ^----------------------------- images ----------------------------- */
+.img-1 {
+    width: 512rem;
+    height: 512rem;
+    border: 20px solid red;
+    border-radius: 10000rem;
+}
+.img-2 {
+    width: 512rem;
+    height: 512rem;
+    border: 20px solid cyan;
+    border-radius: 10000rem;
+}
+.img-3 {
+    width: 512rem;
+    height: 512rem;
+    border: 20px solid blue;
+    border-radius: 10000rem;
+}
+.img-4 {
+    width: 512rem;
+    height: 512rem;
+    border: 20px solid magenta;
+    border-radius: 10000rem;
+    object-fit: cover;
+}
+
+
+#radio-btn-1:checked ~ .slider > .slide-container {
+    transform: translateX(0%);
+}
+
+#radio-btn-2:checked ~ .slider > .slide-container {
+    transform: translateX(-25%);
+}
+
+#radio-btn-3:checked ~ .slider > .slide-container {
+    transform: translateX(-50%);
+}
+
+#radio-btn-4:checked ~ .slider > .slide-container {
+    transform: translateX(-75%);
+}
+/* >--------------------------------------------------------------< */
+/* >                             TEXTS                            < */
+/* >--------------------------------------------------------------< */
+
+.texts {
+    display: flex;
+    flex-basis: 70%;
+    height: 64rem;
+    overflow: hidden;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 16rem;
+    line-height: 1;
+    font-weight: bold;
+    color: cyan;
+    letter-spacing: 8px;
+    animation: slideFuzz 0.5s linear infinite alternate;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100%*4);
+    transition: transform 1s ease-out;
+}
+
+.p1 {
+    display: flex;
+    height: 64rem;
+}
+
+
+#radio-btn-1:checked ~ .texts > .text-container {
+    transform: translateX(0);
+}
+
+#radio-btn-2:checked ~ .texts > .text-container {
+    transform: translateY(-64rem);
+}
+
+#radio-btn-3:checked ~ .texts > .text-container {
+    transform: translateY(-128rem);
+}
+
+#radio-btn-4:checked ~ .texts > .text-container {
+    transform: translateY(-196rem);
+}
+
+/* >--------------------------------------------------------------< */
+/* >                           CONTROLS                           < */
+/* >--------------------------------------------------------------< */
+
+.controls   {
+    display: flex;
+    flex-basis: 30%;
+    justify-content: right;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36rem;
+    height: 36rem;
+    border-radius: 10000rem;
+    cursor: pointer;
+}
+
+.control_place {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 18rem;
+    background: green;
+    border-radius: 10000rem;
+}
+
+.control:hover .control_place {
+    background: orange;
+}
+.control:active .control_place {
+    background: yellowgreen;
+}
+
+#radio-btn-1:checked ~ * [for="radio-btn-1"] > .control_place,
+#radio-btn-2:checked ~ * [for="radio-btn-2"] > .control_place,
+#radio-btn-3:checked ~ * [for="radio-btn-3"] > .control_place,
+#radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place{
+    background: magenta;
+}
+#radio-btn-1:checked ~ * [for="radio-btn-1"] > .control_place:hover,
+#radio-btn-2:checked ~ * [for="radio-btn-2"] > .control_place:hover,
+#radio-btn-3:checked ~ * [for="radio-btn-3"] > .control_place:hover,
+#radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place:hover{
+    background: orange;
+
+}
+
+#radio-btn-1:checked ~ * [for="radio-btn-1"] > .control_place:active,
+#radio-btn-2:checked ~ * [for="radio-btn-2"] > .control_place:active,
+#radio-btn-3:checked ~ * [for="radio-btn-3"] > .control_place:active,
+#radio-btn-4:checked ~ * [for="radio-btn-4"] > .control_place:active{
+    background: yellowgreen;
+
+}
+/* >--------------------------------------------------------------< */
+/* >                             MEDIA                            < */
+/* >--------------------------------------------------------------< */
+
+@media (max-width: 525px) {
+    html {
+        font-size: calc(1rem/32);
+    }
+    .container {
+        gap: 64rem;
+    }
+    .slider, .texts, .controls {
+        justify-content: center;
+        flex-basis: 100%;
+    }
+    .slider {
+        order: 1;
+        padding: 0;
+    }
+    .controls {
+        order: 2;
+    }
+    .texts {
+        order: 3;
+    }
+
+}
